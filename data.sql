@@ -136,17 +136,17 @@ insert into roundjudging
 
 insert into person (name, address, phone, email) values ("Lynne Johaneson", "11319 Priest Valley Drive Coldstream, BC V1B 1B4",	"2505453147", "kljohanes@shaw.ca");
 
-Alice Jantzen,"3460 Hope Drive Armstrong B.C. V0E 1B8",2505036100,aljantzen@hotmail.com
-Cathy Barber,"#35 3665 Westsyde Road Kamloops BC V2B7H5",250 579 9711,gizmogeorgie@yahoo.ca
-Deb Watson,,778-220-7121,petrescuerz@gmail.com
-Derek Dixon,"1880 Red Tail Crescent Kamloops BC V2B8S9",2505541880,dixonld@shaw.ca
-Ellen Nicholson,1558 Southview Terrace,+7784704877,enichol1@shaw.ca
-Lissa Porath,"662 Sycamore Drive Kamloops BC  V2B 6R5",250-579-5228,aarcat@shaw.ca
-Lynne Johaneson,"11319 Priest Valley Drive Coldstream BC V1B1B4  ",250-351-5263,kljohanes@shaw.ca
-Martha Goheen,"2068 Monteith Drive Kamloops BC V2E 2G5",778-220-3262,cruisero@telus.net
-Natalie Vivian,"1787 Gardiner Rd Kamloops BC V2C6V8",250-573-3123,natalie-vivian@shaw.ca
-Tanya Vivian,"1357 Crestwood Drive Kamloops BC V2C 5H1",250-319-8428,tvivian@shaw.ca
-Trishanna Ramsey,"3695 coldicott dr armstrong bc v0e1b4",250-938-2210,Okanagangeckos@hotmail.com
-Jan Wherley,"1206 Chimney Valley Rd Williams Lake BC V2G-4W6",250 392-3479,janpeter@xplornet.ca
-Pat Truitt,"8227 buchanan rd. coldstream b.c. v1b 3b8",250-260-3078,cantree@telus.net
+insert into person (name,address, phone, email) values ("Alice Jantzen","3460 Hope Drive Armstrong B.C. V0E 1B8","2505036100","aljantzen@hotmail.com");
+insert into person (name,address, phone, email) values ("Cathy Barber","#35 3665 Westsyde Road Kamloops BC V2B7H5","2505799711","gizmogeorgie@yahoo.ca");
+insert into person (name,phone, email) values ("Deb Watson","7782207121","petrescuerz@gmail.com");
+insert into person (name,address, phone, email) values ("Derek Dixon","1880 Red Tail Crescent Kamloops BC V2B8S9","2505541880","dixonld@shaw.ca");
+insert into person (name,address, phone, email) values ("Ellen Nicholson","1558 Southview Terrace","7784704877","enichol1@shaw.ca");
+insert into person (name,address, phone, email) values ("Lissa Porath","662 Sycamore Drive Kamloops BC  V2B 6R5","250-579-5228","aarcat@shaw.ca");
+insert into person (name,address, phone, email) values ("Lynne Johaneson","11319 Priest Valley Drive Coldstream BC V1B1B4  ","250-351-5263","kljohanes@shaw.ca");
+insert into person (name,address, phone, email) values ("Martha Goheen","2068 Monteith Drive Kamloops BC V2E 2G5","778-220-3262","cruisero@telus.net");
+insert into person (name,address, phone, email) values ("Natalie Vivian","1787 Gardiner Rd Kamloops BC V2C6V8","250-573-3123","natalie-vivian@shaw.ca");
+insert into person (name,address, phone, email) values ("Tanya Vivian","1357 Crestwood Drive Kamloops BC V2C 5H1","250-319-8428","tvivian@shaw.ca");
+insert into person (name,address, phone, email) values ("Trishanna Ramsey","3695 coldicott dr armstrong bc v0e1b4","250-938-2210","Okanagangeckos@hotmail.com");
+insert into person (name,address, phone, email) values ("Jan Wherley","1206 Chimney Valley Rd Williams Lake BC V2G-4W6","250 392-3479","janpeter@xplornet.ca");
+insert into person (name,address, phone, email) values ("Pat Truitt","8227 Buchanan Rd. Coldstream B.C. V1B3B8","2502603078","cantree@telus.net");
 
