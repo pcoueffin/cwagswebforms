@@ -29,7 +29,9 @@ def personUpdate(no):
     print (request.forms.get('name'))
     return template('edit_person', results=cwagsDBSelect("select name, address, phone, email FROM person where id = :id", {"id": no}, scope="one"), action=("/person/" + str(no)), id=no)
     
-    
+@route('/register')
+def form():
+    return template('make_form', rows=cwagsDBSelect("SELECT datatype, dataid, dataname FROM forms"), action=("/register"))
 
 
 
