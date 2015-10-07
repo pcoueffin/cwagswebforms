@@ -71,7 +71,7 @@ def personUpdate(id):
     
 @route('/register')
 def form():
-    return template('make_form', rows=cwagsDBSelect("SELECT datatype, dataid, dataname FROM forms"), action=("/register"))
+    return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname FROM forms"))
 
 
 
