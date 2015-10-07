@@ -1,3 +1,23 @@
+insert into forms (id, dataid, datatype, dataname) values (1, 1, 'text', 'name');
+insert into forms (id, dataid, datatype, dataname) values (2, 2, 'text', '
+address');
+insert into forms (id, dataid, datatype, dataname) values (3, 3, 'text', '
+phone number');
+insert into forms (id, dataid, datatype, dataname) values (4, 4, 'text', '
+email address');
+insert into forms (id, dataid, datatype, dataname) values (5, 5, 'text', '
+dogs name');
+insert into forms (id, dataid, datatype, dataname) values (6, 6, 'text', '
+dogs cwags number');
+insert into forms (id, dataid, datatype, dataname) values (7, 7, 'text', '
+breed of dog');
+insert into forms (id, dataid, datatype, dataname) values (8, 8, 'text', '
+handler - disability?');
+insert into forms (id, dataid, datatype, dataname) values (9, 9, 'text', '
+dog - reactivity?
+');
+
+
 insert into person (name,address,phone,email) values ("Courtenay Watson","485 Fortune Dr Kamloops BC V2B2J5","2505787101","licketysit@gmail.com");
 insert into person (name,email) values ("Dana Gallagher","3dogslater@gmail.com");
 insert into person (name,address,phone,email) values ("Shauna Moore","Box 1271 Ashcroft BC V0K1A0","2503159407","nauna@telus.net");
