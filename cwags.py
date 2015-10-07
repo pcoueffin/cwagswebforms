@@ -18,9 +18,10 @@ def cwagsDBSelect(query, params=None, scope="all"):
 
 class CWAGSDbResult:
     def __init__(self, names, values, scope):
-        print "dbresult: names = " + str([name[0] for name in names]) \
-            + " vals = " + str(values) + " scope = " + scope
-        self.names  = [name[0] for name in names]
+        #print "dbresult: names = " + str([name[0] for name in names]) \
+        #    + " vals = " + str(values) + " scope = " + scope
+        if (names != None):
+            self.names  = [name[0] for name in names]
         self.values = values
         self.idx    = 0
         self.scope  = scope
@@ -37,7 +38,6 @@ class CWAGSDbResult:
             name=self.names[self.idx]
             self.idx+=1
             ret={name: val}
-        print "From hell: " + str(ret)
         return ret
     
     #Python 3 compat:
@@ -52,11 +52,22 @@ def people():
 def person(id):
     return template('edit_person', results=cwagsDBSelect("select name, address, phone, email FROM person where id = :id", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
 
-@route('/person/<no:int>', method='POST')
-def personUpdate(no):
-    print "UPDATE... person " + str(no)
-    print (request.forms.get('name'))
-    return template('edit_person', results=cwagsDBSelect("select name, address, phone, email FROM person where id = :id", {"id": no}, scope="one"), action=("/person/" + str(no)), id=no)
+@route('/person/new', method='GET')
+def person():
+    return template('edit_person', results=cwagsDBSelect("select NULL as name, NULL as address, NULL as phone, NULL as email", scope="one"), action="/person/-1", id=-1)
+
+@route('/person/<id:int>', method='POST')
+def personUpdate(id):
+    if (id >= 0):
+        print "Request " + str(request.forms.keys())
+        print "Name is: " + request.forms.get("name")
+        print "UPDATE... person " + str(id)
+        cwagsDBSelect("UPDATE person set name= :name, address= :address, phone= :phone, email= :email WHERE id = :id", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email"), "id": id})
+    else:
+        print "INSERT... person"
+        cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email)", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})        
+        res = cwagsDBSelect("SELECT last_insert_rowid()", scope="one");
+    return template('edit_person', results=cwagsDBSelect("SELECT name, address, phone, email FROM person WHERE id = :id", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
     
 @route('/register')
 def form():

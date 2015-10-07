@@ -4,19 +4,13 @@
   <table border="0">
     %hdr=None
     %for row in rows:
-    %  if not hdr:
-    %    hdr=row.keys()
-    %  end
-    %  for col in hdr:
     <tr>
-      <td>{{col.title()}}</td>
+      <td>{{row['dataname'].title()}}</td>
       <td>
-	<input type="text" size="10" name="{{col}}" 
-	       value="{{row[col]}}"/>
+	<input type="{{row['datatype']}}"  size="10" id="{{row['dataid']}}"/>
       </td>
     </tr>
-    %  end
     %end
   </table>
-  <input type="submit" name="save" value="save">
+  <input type="submit" name="submit" value="save">
 </form>
