@@ -1,21 +1,22 @@
+insert into forms (id, dataid, datatype, dataname, datalength) values (0, 0, 'text', 'name',15);
 insert into forms (id, dataid, datatype, dataname, datalength) values (1, 1, 'text', '
-phone number', 10);
-insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', 'name',15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (3, 3, 'checkbox', '
-handler - disability?', 0);
-insert into forms (id, dataid, datatype, dataname, datalength) values (4, 4, 'text', '
 address', 30);
-insert into forms (id, dataid, datatype, dataname, datalength) values (5, 5, 'checkbox', '
+insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', '
+phone number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (3, 3, 'text', '
+email address', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (4, 4, 'text', '
+dog name', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (5, 5, 'text', '
+dog cwags number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (6, 6, 'text', '
+breed of dog', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (7, 7, 'checkbox', '
+handler - disability?', 0);
+insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'checkbox', '
 dog - reactivity?
 ', 0);
-insert into forms (id, dataid, datatype, dataname, datalength) values (6, 6, 'text', '
-email address', 15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (7, 7, 'text', '
-breed of dog', 15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'text', '
-dog cwags number', 10);
-insert into forms (id, dataid, datatype, dataname, datalength) values (9, 9, 'text', '
-dog name', 10);
+
 
 
 
