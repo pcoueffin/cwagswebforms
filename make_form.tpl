@@ -7,14 +7,24 @@
 
   <div class="form-all">
     <ul class="form-section page-section">
-%dataid=rows
-%for row in rows:
-      <li class="form-line" data-type={{datatype}} id=id_{{dataid}}>
-        <label class="form-label form-label-left form-label-auto" id="label_{{dataid}}" for="input_1"> {{dataname}} </label>
-            <input class="form-textbox" type="text" size="10" name="q{{dataid}}_{{dataname}}" id="{{dataid}}" />
+%names=results[0]
+  %row=results[1][0]
+  %for (elt, name) in zip(row, names):
+%if name[0]== "datatype":
+%datatype = elt
+%elif name[0] == "dataid":
+%dataid = elt
+%elif name[0] == "dataname":
+%dataname = elt
+%else:
+%pass
+    %end
+%end
+ <li class="form-line" data-type={{datatype}} id=id_{{dataid}}>
+        <label class="form-label form-label-left form-label-auto" id="label_{{dataid}}" for="input_1"> {{dataname.title()}} </label>
+            <input class="form-textbox" type="text" size="10" name="{{dataname}}" id="{{dataid}}" />
         </div>
       </li>
-%end
       <li class="form-line" data-type="control_button" id="id_2">
         <div id="cid_2" class="form-input-wide">
           <div style="margin-left:156px" class="form-buttons-wrapper">

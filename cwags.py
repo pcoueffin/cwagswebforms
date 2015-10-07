@@ -15,6 +15,16 @@ def cwagsDBSelect(query, params=None, scope="all"):
     names=c.description
     return (names, res)
 
+'''
+def assigntovariables(selects, froms):
+	rowdict = {}
+	for column in selects:
+		columnid = column
+		sqlStatement = "SELECT " + column + " FROM " + froms
+		rowdict[columnid] = cwagsDBSelect(sqlStatement)
+	return rowdict
+'''
+
 @route('/people')
 def people():
     return template('make_table', rows=cwagsDBSelect("SELECT id, name FROM person")[1])
@@ -29,11 +39,14 @@ def personUpdate(no):
     print (request.forms.get('name'))
     return template('edit_person', results=cwagsDBSelect("select name, address, phone, email FROM person where id = :id", {"id": no}, scope="one"), action=("/person/" + str(no)), id=no)
     
-@route('/register')
+@route('/register', method='GET')
 def form():
-    return template('make_form', rows=cwagsDBSelect("SELECT datatype, dataid, dataname FROM forms"), action=("/register"))
+	return template('make_form', results=cwagsDBSelect("SELECT datatype, dataid, dataname FROM forms"), action=("/register"))
 
-
+@route('/register', method="POST")
+def formSend():
+	print request.forms.keys(), request.forms.values()
+	
 
 debug(True)
 run(reloader=True)
