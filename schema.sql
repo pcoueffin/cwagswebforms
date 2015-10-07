@@ -6,12 +6,7 @@ create table dog          (id integer PRIMARY KEY, name varchar, breed varchar, 
 create table judge        (id integer PRIMARY KEY REFERENCES person(id));
 create table round        (id integer PRIMARY KEY, event integer REFERENCES event(id), idx integer, level integer);
 create table roundjudging (round integer REFERENCES round(id), judge REFERENCES judge(id));
-CREATE TABLE forms(
-ID INT PRIMARY KEY    NOT NULL,
-dataid   INT   NOT NULL,
-datatype  TEXT  NOT NULL,
-dataname   TEXT   NOT NULL
-, formtype text);  
+CREATE TABLE forms(ID INT PRIMARY KEY    NOT NULL, dataid   INT   NOT NULL, datatype  TEXT  NOT NULL, dataname   TEXT   NOT NULL, datalength INT NOT NULL, formtype text);  
 
 insert into event (date, location, name) values ("July 31, 2015",     "Kamloops", "CWAGS July 31");
 insert into event (date, location, name) values ("January 25, 2015",  "Kamloops", "CWAGS Scent - Jan 25");

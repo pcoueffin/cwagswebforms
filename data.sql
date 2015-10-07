@@ -1,21 +1,24 @@
-insert into forms (id, dataid, datatype, dataname) values (1, 1, 'text', 'name');
-insert into forms (id, dataid, datatype, dataname) values (2, 2, 'text', '
-address');
-insert into forms (id, dataid, datatype, dataname) values (3, 3, 'text', '
-phone number');
-insert into forms (id, dataid, datatype, dataname) values (4, 4, 'text', '
-email address');
-insert into forms (id, dataid, datatype, dataname) values (5, 5, 'text', '
-dogs name');
-insert into forms (id, dataid, datatype, dataname) values (6, 6, 'text', '
-dogs cwags number');
-insert into forms (id, dataid, datatype, dataname) values (7, 7, 'text', '
-breed of dog');
-insert into forms (id, dataid, datatype, dataname) values (8, 8, 'text', '
-handler - disability?');
-insert into forms (id, dataid, datatype, dataname) values (9, 9, 'text', '
+insert into forms (id, dataid, datatype, dataname, datalength) values (1, 1, 'text', '
+phone number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', 'name',15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (3, 3, 'checkbox', '
+handler - disability?', 0);
+insert into forms (id, dataid, datatype, dataname, datalength) values (4, 4, 'text', '
+address', 30);
+insert into forms (id, dataid, datatype, dataname, datalength) values (5, 5, 'checkbox', '
 dog - reactivity?
-');
+', 0);
+insert into forms (id, dataid, datatype, dataname, datalength) values (6, 6, 'text', '
+email address', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (7, 7, 'text', '
+breed of dog', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'text', '
+dog cwags number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (9, 9, 'text', '
+dog name', 10);
+
+
+
 
 
 insert into person (name,address,phone,email) values ("Courtenay Watson","485 Fortune Dr Kamloops BC V2B2J5","2505787101","licketysit@gmail.com");

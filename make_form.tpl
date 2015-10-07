@@ -7,7 +7,7 @@
     <tr>
       <td>{{row['dataname'].title()}}</td>
       <td>
-	<input type="{{row['datatype']}}"  size="10" id="{{row['dataid']}}"/>
+	<input type="{{row['datatype']}}"  size="{{row['datalength']}}" id="{{row['dataid']}}"/>
       </td>
     </tr>
     %end
