@@ -2,7 +2,7 @@ import sqlite3
 from bottle import route, run, debug, template, request
 
 def cwagsDBSelect(query, params=None, scope="all"):
-    c=cwagsDB()
+    c=cwagsDB().cursor()
     if params:
         c.execute(query, params)
     else:
@@ -14,30 +14,29 @@ def cwagsDBSelect(query, params=None, scope="all"):
     names=c.description
     return CWAGSDbResult(names, res, scope)
 
-def cwagsDBUpdate(table, id, params, query):
-    print "Updating table: " + table + " at row " + str(id)
+def cwagsDBUpdate(table, id, params):
+    idx=0
     # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables! 
     query="UPDATE %s SET " % table
     for key in params:        
-        print "Setting value of " + key + " to " + params[key]
-        query += key + '= "' + params[key] + '"'
+        if idx > 0:
+            query += ", "
+        query += key + ' = "' + params[key] + '"'
+        idx += 1
     query += " WHERE id = " + str(id)
+    print query
     c=cwagsDB()
     c.execute(query)
-    c.close()
-    #return cwagsDBSelect(query, {'id': id}, scope="one")
+    c.commit()
     
 
 def cwagsDB():
-    conn=sqlite3.connect('cwags.sqlite')
-    return conn.cursor()
+    return sqlite3.connect('cwags.sqlite')
 
 
 
 class CWAGSDbResult:
     def __init__(self, names, values, scope):
-        #print "dbresult: names = " + str([name[0] for name in names]) \
-        #    + " vals = " + str(values) + " scope = " + scope
         if (names != None):
             self.names  = [name[0] for name in names]
         self.values = values
@@ -78,11 +77,11 @@ def person():
 @route('/person/<id:int>', method='POST')
 def personUpdate(id):
     if (id >= 0):
-        print "Request " + str(request.forms)
         print "UPDATE... person " + str(id)
+        if "save" in request.forms.keys():
+            del(request.forms["save"])
         # cwagsDBSelect("UPDATE person set name= :name, address= :address, phone= :phone, email= :email WHERE id = :id", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email"), "id": id})
-        cwagsDBUpdate("person", id, request.forms, 
-                      "SELECT name, address, phone, email FROM person WHERE id = :id")
+        cwagsDBUpdate("person", id, request.forms)
     else:
         print "INSERT... person"
         cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email)", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})
