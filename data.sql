@@ -1,162 +1,40 @@
 insert into forms (id, dataid, datatype, dataname, datalength) values (0, 0, 'text', 'name',15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (1, 1, 'text', '
-address', 30);
-insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', '
-phone number', 10);
-insert into forms (id, dataid, datatype, dataname, datalength) values (3, 3, 'text', '
-email address', 15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (4, 4, 'text', '
-dog name', 10);
-insert into forms (id, dataid, datatype, dataname, datalength) values (5, 5, 'text', '
-dog cwags number', 10);
-insert into forms (id, dataid, datatype, dataname, datalength) values (6, 6, 'text', '
-breed of dog', 15);
-insert into forms (id, dataid, datatype, dataname, datalength) values (7, 7, 'checkbox', '
-handler - disability?', 0);
-insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'checkbox', '
-dog - reactivity?
-', 0);
-
-
-
+insert into forms (id, dataid, datatype, dataname, datalength) values (1, 1, 'text', 'address', 30);
+insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', 'phone number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (3, 3, 'text', 'email address', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (4, 4, 'text', 'dog name', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (5, 5, 'text', 'dog cwags number', 10);
+insert into forms (id, dataid, datatype, dataname, datalength) values (6, 6, 'text', 'breed of dog', 15);
+insert into forms (id, dataid, datatype, dataname, datalength) values (7, 7, 'checkbox', 'handler - disability?', 0);
+insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'checkbox', 'dog - reactivity?', 0);
 
 
 
 insert into person (name,address,phone,email) values ("Courtenay Watson","485 Fortune Dr Kamloops BC V2B2J5","2505787101","licketysit@gmail.com");
 insert into person (name,email) values ("Dana Gallagher","3dogslater@gmail.com");
 insert into person (name,address,phone,email) values ("Shauna Moore","Box 1271 Ashcroft BC V0K1A0","2503159407","nauna@telus.net");
+insert into person (name) values ("PlaceHolder Judge");
 insert into judge select id from person;
 
-insert into round (event, idx, level) select id, 1, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 2, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 3, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 4, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 5, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 6, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 7, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 8, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id, 9, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,10, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,11, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,12, 1 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,13, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,14, 2 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,15, 3 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,16, 3 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,17, 3 from event where date = "February 22, 2015" and location = "Kamloops";
-insert into round (event, idx, level) select id,18, 3 from event where date = "February 22, 2015" and location = "Kamloops";
+insert into round (event, idx, level, judge) select event.id, 1, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops" and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id, 2, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id, 3, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id, 4, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id, 5, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Shauna Moore";
+insert into round (event, idx, level, judge) select event.id, 6, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Shauna Moore";
+insert into round (event, idx, level, judge) select event.id, 7, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id, 8, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id, 9, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id,10, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id,11, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id,12, 1, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id,13, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id,14, 2, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge) select event.id,15, 3, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id,16, 3, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id,17, 3, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
+insert into round (event, idx, level, judge) select event.id,18, 3, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
 
-select round.id, judge.id from event, round, judge, person where event.date = "February 22, 2015" and event.location = "Kamloops" and event.id = round.event and round.idx = 1 and judge.id = person.id and person.name = "Courtenay Watson";
-
-
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 1 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 2 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 3 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 4 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 5 and judge.id = person.id 
-          and person.name = "Shauna Moore";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 6 and judge.id = person.id 
-          and person.name = "Shauna Moore";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 7 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 8 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 9 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 10 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 11 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 12 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 13 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 14 and judge.id = person.id 
-          and person.name = "Courtenay Watson";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 15 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 16 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 17 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
-insert into roundjudging 
-    select round.id, judge.id from event, round, judge, person 
-        where event.date = "February 22, 2015" and event.location = "Kamloops" 
-          and event.id = round.event
-          and round.idx = 18 and judge.id = person.id 
-          and person.name = "Dana Gallagher";
 
 insert into person (name, address, phone, email) values ("Lynne Johaneson", "11319 Priest Valley Drive Coldstream, BC V1B 1B4",	"2505453147", "kljohanes@shaw.ca");
 
@@ -174,3 +52,19 @@ insert into person (name,address, phone, email) values ("Trishanna Ramsey","3695
 insert into person (name,address, phone, email) values ("Jan Wherley","1206 Chimney Valley Rd Williams Lake BC V2G-4W6","250 392-3479","janpeter@xplornet.ca");
 insert into person (name,address, phone, email) values ("Pat Truitt","8227 Buchanan Rd. Coldstream B.C. V1B3B8","2502603078","cantree@telus.net");
 
+insert into round (event, idx, level, judge, ring, course) select event.id,1,1,judge.id,1,"a"  from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,2,2,judge.id,2,"b"  from event, judge, person where date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,3,1,judge.id,1,"a" from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,4,2,judge.id,2,"b" from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,1,1,judge.id,1,"a" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,2,2,judge.id,2,"b" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,3,1,judge.id,1,"a" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,4,2,judge.id,2,"b" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,5,1,judge.id,1,"c" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "PlaceHolder Judge";
+insert into round (event, idx, level, judge, ring, course) select event.id,6,1,judge.id,1,"c" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "PlaceHolder Judge";
+insert into round (event, idx, level, judge, ring, course) select event.id,1,1,judge.id,1,"a" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,2,2,judge.id,2,"b" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,3,1,judge.id,1,"a" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "PlaceHolder Judge";
+insert into round (event, idx, level, judge, ring, course) select event.id,4,2,judge.id,2,"b" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "PlaceHolder Judge";
+insert into round (event, idx, level, judge, ring, course) select event.id,5,2,judge.id,1,"c" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,6,2,judge.id,1,"c" from event, judge, person where event.date = "October 30, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
