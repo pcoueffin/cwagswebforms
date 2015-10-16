@@ -92,7 +92,9 @@ def personUpdate(id):
 def form():
     return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
 
-
+@route('/createEntries')
+def update():
+    cwagsDBSelect("Insert into entries(roundid, dogid) VALUES (:roundid, :dogid)", {"roundid":} )
 
 debug(True)
 run(reloader=True)

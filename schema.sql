@@ -1,6 +1,5 @@
 create table event        (id integer  PRIMARY KEY, date timestamp, location varchar, name varchar, hours integer, run_cost integer);
-
-
+create table entries (Timestamp varchar,  Name varchar,  Address varchar,  Phonenumber varchar,  Emailaddress varchar,  HandlerDisability varchar,  Dogsname1 varchar,  DogsCWAGSnumber1 varchar,  Breedofdog1 varchar,  DogReactivity1 varchar,  SignupforOctoberRoundsforthisdog1 varchar,  Wouldyouliketoregisteranotherdog2 varchar,  Dogsname2 varchar,  DogsCWAGSnumber2 varchar,  Breedofdog2 varchar,  DogReactivity2 varchar,  SignupforOctoberRoundsforthisdog2 varchar,  Wouldyouliketoregisteranotherdog3 varchar,  Dogsname3 varchar,  DogsCWAGSnumber3 varchar,  Breedofdog3 varchar,  DogReactivity3 varchar,  SignupforOctoberRoundsforthisdog3 varchar,  Thisquestionallowsmultipledogsperform varchar,  Pleaseaddanynoteshere varchar,  Paymentmethod varchar,  AddPaymentdetailsifapplicable varchar);
 create table person       (id integer  PRIMARY KEY, name varchar, address varchar, email varchar, phone varchar, disabilities varchar);
 create table dog          (id integer PRIMARY KEY, name varchar, breed varchar, cwags varchar, disabilities varchar, owner integer REFERENCES person(id));
 create table judge        (id integer PRIMARY KEY REFERENCES person(id));
