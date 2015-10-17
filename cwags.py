@@ -92,9 +92,28 @@ def personUpdate(id):
 def form():
     return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
 
-@route('/createEntries')
-def update():
-    cwagsDBSelect("Insert into entries(roundid, dogid) VALUES (:roundid, :dogid)", {"roundid":} )
+@route('/viewrunningorder/<id:int>', method='GET')
+def update(id):
+    rows = cwagsDBSelect("Select dog, dogname from running_order WHERE round=:id and dog = dogid;", {'id':id})
+    return template('make_table', rows=rows)
+
+@route('/lookupentry/<name:path>', method='GET')
+def form(name):
+    dogid = cwagsDBSelect("select id from dog where name = :name", {"name": name})
+    id = dogid.next()['id']
+    return template('make_table_of_links', rows=cwagsDBSelect("select id, round FROM run where dog = :id", {"id": id}))
+
+@route('/editentry/<id:int>', method='GET')
+def form(id):
+    return template('edit_person', results=cwagsDBSelect("select id, round FROM run where id = :id", {"id": id}), action=("/editentry/" + str(id)), id=id)
+
+@route('/editentry/<id:int>', method='POST')
+def form(id):
+    print "UPDATE... run " + str(id)
+    if "save" in request.forms.keys():
+        del(request.forms["save"])
+    cwagsDBUpdate("run", id, request.forms)
+    
 
 debug(True)
 run(reloader=True)

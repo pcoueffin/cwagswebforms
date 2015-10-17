@@ -1,13 +1,13 @@
 Trbel="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 30 Round 4 Level 2"
 Barbie="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2, Oct 23 Round 3 Level 1, Oct 23 Round 4 Level 2, Oct 30 Round 5 Level 2, Oct 30 Round 6 Level 2"
 Spring="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2, Oct 30 Round 1 Level 1, Oct 30 Round 2 Level 2, Oct 30 Round 3 Level 1, Oct 30 Round 4 Level 2, Oct 30 Round 5 Level 2, Oct 30 Round 6 Level 2"
-Joy="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 30 Round 2 Level 2"
+Joy="Oct 16 Level 2 Round 2, Oct 16 Level 1 Round 1, Oct 30 Round 2 Level 2"
 Hunter="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 23 Round 2 Level 2, Oct 23 Round 4 Level 2, Oct 30 Round 2 Level 2, Oct 30 Round 4 Level 2"
 Chloe="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 23 Round 2 Level 2, Oct 23 Round 4 Level 2, Oct 30 Round 2 Level 2, Oct 30 Round 4 Level 2"
-Joey="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2"
+Joey="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3"
 Jazz="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3, Oct 30 Round 3 Level 1"
 China="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3, Oct 23 Round 1 Level 1, Oct 23 Round 3 Level 1, Oct 30 Round 1 Level 1, Oct 30 Round 3 Level 1"
-Indigo="Oct 16 Level 1 Round 3, Oct 16 Level 2 Round 4"
+Indigo="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3"
 
 
 

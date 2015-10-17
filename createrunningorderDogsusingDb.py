@@ -1,3 +1,6 @@
+import sqlite3
+
+
 class CWAGSDbResult:
     def __init__(self, names, values, scope):
         if (names != None):
@@ -47,19 +50,7 @@ def cwagsDB():
 
 
 
-Trbel="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 30 Round 4 Level 2"
-Barbie="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2, Oct 23 Round 3 Level 1, Oct 23 Round 4 Level 2, Oct 30 Round 5 Level 2, Oct 30 Round 6 Level 2"
-Spring="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2, Oct 30 Round 1 Level 1, Oct 30 Round 2 Level 2, Oct 30 Round 3 Level 1, Oct 30 Round 4 Level 2, Oct 30 Round 5 Level 2, Oct 30 Round 6 Level 2"
-Joy="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 30 Round 2 Level 2"
-Hunter="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 23 Round 2 Level 2, Oct 23 Round 4 Level 2, Oct 30 Round 2 Level 2, Oct 30 Round 4 Level 2"
-Chloe="Oct 16 Level 2 Round 2, Oct 16 Level 2 Round 4, Oct 23 Round 2 Level 2, Oct 23 Round 4 Level 2, Oct 30 Round 2 Level 2, Oct 30 Round 4 Level 2"
-Joey="Oct 16 Level 1 Round 1, Oct 16 Level 2 Round 2"
-Jazz="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3, Oct 30 Round 3 Level 1"
-China="Oct 16 Level 1 Round 1, Oct 16 Level 1 Round 3, Oct 23 Round 1 Level 1, Oct 23 Round 3 Level 1, Oct 30 Round 1 Level 1, Oct 30 Round 3 Level 1"
-Indigo="Oct 16 Level 1 Round 3, Oct 16 Level 2 Round 4"
-
-dogs = cwagsDBSelect("select SignupforOctoberRoundsforthisdog1 from entries;")
-print dogs
+dogs = cwagsDBSelect("select EmailAddress, Dogsname1, SignupforOctoberRoundsforthisdog1, Wouldyouliketoregisteranotherdog2, Dogsname2, SignupforOctoberRoundsforthisdog2 from entries;")
 
 listofdata = {}
 fordatabase = {}
@@ -90,6 +81,7 @@ def datatodict(name, rawdata):
             level = roundlevel[1]
             
         else:
+            #print data
             dateround = data.split("Round")
             roundlevel = dateround[1].split("Level")
             date =  dateround[0]
@@ -99,11 +91,38 @@ def datatodict(name, rawdata):
         entry[uniqueid] = [date, level, rnd]
     entries[name]= entry
 
+def create_run_info(signup,uniqueid):
+    entry = {}
+    data = signup
+    print data
+    if 1 <0:
+        dateround = data.split("Round")
+        roundlevel = dateround[0].split("Level")
+        date = roundlevel[0]
+        #print roundlevel
+        rnd = dateround[1]
+        level = roundlevel[1]
+            
+    else:
+        #print data
+        dateround = data.split("Round")
+        roundlevel = dateround[1].split("Level")
+        date =  dateround[0]
+        rnd = roundlevel[0]
+        level = roundlevel[1]
+        #print level, date, rnd
+    entry[uniqueid] = [date, level, rnd]
+    print entry
 
+for dog in dogs:
+    datatodict(dog['Dogsname1'], dog['SignupforOctoberRoundsforthisdog1'])
+    if len(dog['Dogsname2'])>1 :
+        datatodict(dog['Dogsname2'], dog['SignupforOctoberRoundsforthisdog2'])
+    #print dog["Emailaddress"]
+print create_run_info(dog['SignupforOctoberRoundsforthisdog1'],dog['Dogsname1'])
+    #cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, "")", "round":)
 
-
-
-    
+"""
 datatodict('Trbel', Trbel)
 datatodict('Barbie', Barbie)
 datatodict('China', China)
@@ -119,9 +138,10 @@ datatodict('Joey', Joey)
 datatodict('Joy', Joy)
 
 datatodict('Spring', Spring)
-
+"""
 #print entries
 
+#print entries.keys()
 oct16orderR1 = []
 
 oct16orderR2 = []
@@ -152,10 +172,14 @@ for key in entries:
     oct16order["Three"] = oct16orderR3
     oct16order["Four"] = oct16orderR4
     #print oct16order
-
+"""
 for key in ["One", "Two", "Three", "Four"]:
     print "Round " + key
     for entry in oct16order[key]:
         print entry[0]
     print "_____________________"
     
+    
+for entry in dogs:
+    print entry["EmailAddress"]
+"""
