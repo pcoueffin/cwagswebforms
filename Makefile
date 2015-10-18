@@ -1,9 +1,11 @@
 run: cwags.sqlite
 	python cwags.py
 
-cwags.sqlite: schema.sql data.sql
+cwags.sqlite: schema.sql data.sql addtodb1.py entries1.csv createrunningorderDogsusingDbCreateEntires.py
 	rm -f $@
-	cat $^ | sqlite3 $@
+	cat schema.sql data.sql | sqlite3 $@
+	python addtodb1.py $@ entries1.csv
+	python createrunningorderDogsusingDbCreateEntires.py $@
 
 commit:
 	git commit

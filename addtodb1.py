@@ -1,9 +1,17 @@
+import sys
+if (len(sys.argv) != 3):
+    print "Usage: " + sys.argv[0] + " <databasefile> <csvfile>"
+    exit(1)
+
+dbFileName=sys.argv[1]
+csvFileName=sys.argv[2]
+
 import csv
 import sqlite3
 #from bottle import route, run, debug, template, request
 
 n=0
-csvfile = open('entries1.csv', 'rb')
+csvfile = open(csvFileName, 'rb')
 
 spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 headings = []
@@ -65,7 +73,7 @@ def cwagsDBSelect(query, params=None, scope="all"):
 
 def cwagsDB():
     print "connecting..."
-    return sqlite3.connect('cwags.sqlite')
+    return sqlite3.connect(dbFileName)
     
 print "anything"
 for row in spamreader:

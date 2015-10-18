@@ -1,3 +1,12 @@
+import sys
+if (len(sys.argv) != 2):
+    print "Usage: " + sys.argv[0] + " <databasefile>"
+    exit(1)
+
+dbFileName=sys.argv[1]
+
+
+
 import sqlite3
 
 
@@ -45,7 +54,7 @@ def cwagsDBSelect(query, params=None, scope="all"):
 
 def cwagsDB():
     print "connecting..."
-    return sqlite3.connect('cwags.sqlite')
+    return sqlite3.connect(dbFileName)
     
     
 
