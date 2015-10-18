@@ -1,5 +1,5 @@
 import sqlite3
-from bottle import route, run, debug, template, request
+from bottle import route, run, debug, template, request, static_file
 
 def cwagsDBSelect(query, params=None, scope="all"):
     c=cwagsDB().cursor()
@@ -61,8 +61,15 @@ class CWAGSDbResult:
     def __next__(self):
         return self.next(self)
 
+
+@route('/favico.ico', method='GET')
+@route('/favicon.ico', method='GET')
+def get_favicon():
+    return static_file('favico.ico', root='./static/images/')
+
 @route('/people')
 def people():
+    print "foo"
     return template('make_table', rows=cwagsDBSelect("SELECT id, name FROM person"))
 
 @route('/person/<id:int>', method='GET')
