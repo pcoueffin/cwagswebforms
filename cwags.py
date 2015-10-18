@@ -70,7 +70,7 @@ def get_favicon():
 @route('/people')
 def people():
     print "foo"
-    return template('make_table', rows=cwagsDBSelect("SELECT id, name FROM person"))
+    return template('make_link_table', rows=cwagsDBSelect("SELECT id, name FROM person"), linkcols={"id": "id", "name": "id"}, base="/person/")
 
 @route('/person/<id:int>', method='GET')
 def person(id):
