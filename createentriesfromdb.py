@@ -62,37 +62,50 @@ def create_run_info(signup,uniqueid):
     print info
     for data in info:
         print data, uniqueid
-        if "16" in data:
-            dateround = data.split("Round")
-            roundlevel = dateround[0].split("Level")
-            date = roundlevel[0]
-            #print roundlevel
-            rnd = dateround[1]
-            level = roundlevel[1]
-            roundid = int(rnd)
-            #print roundid
-            roundidxx = cwagsDBSelect("Select id from round where event = 4 and idx = :roundid;", {"roundid":roundid})
-            roundidx = roundidxx.next()
-            #print roundidx
-            try:
-                tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
-                print tryclause.next()               
-                print "Try succeeded"
-            except:
-                print "Create this entry!", uniqueid, data                
-                tryclause = cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, '');", {"round": roundidx["id"], "dog": uniqueid})
-                tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
-                
-        else:
-            #print data
-            dateround = data.split("Round")
-            roundlevel = dateround[1].split("Level")
-            date =  dateround[0]
-            rnd = roundlevel[0]
-            level = roundlevel[1]
-            #print level, date, rnd
+        roundpos = data.find("Round")
+        roundnumpos = roundpos + 6
+        rnd = data[roundnumpos:roundnumpos+1]
+        levelpos = data.find("Level")
+        levelnumpos = levelpos + 6
+        level = data[levelnumpos:levelnumpos+1]
+        #dateround = data.split("Round", "Level")
+        #print dateround
+        #roundlevel = dateround[0].split("Level")
+        #print roundlevel
+        #rnd = dateround[1]
+        #level = roundlevel[1]
+        roundid = int(rnd)
+        #print roundid
+        eventid = lookupeventid(data)
+        eventnum = eventid["id"]
+        roundidxx = cwagsDBSelect("Select id from round where event = :eventnum and idx = :roundid;", {"roundid":roundid, "eventnum":eventnum})
+        roundidx = roundidxx.next()
+        #print roundidx
+        try:
+            tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
+            print tryclause.next()               
+            print "Try succeeded"
+        except:
+            print "Create this entry!", uniqueid, data                
+            tryclause = cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, '');", {"round": roundidx["id"], "dog": uniqueid})
+            tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
 
-
+def lookupeventid(datafrominfo):
+    datedictionary = {16: "October 16, 2015", 23: "October 23, 2015", 30: "October 30, 2015", 6: "November 06, 2015", 20: "November 20, 2015", 27: "November 27, 2015", 18: "December 18, 2015"}
+    #datafrominfo = "Oct 23 Round 4 Level 2"
+    datenumbers = datafrominfo.strip()
+    print datenumbers
+    relevantdata = int(datenumbers[4:6])
+    try:
+        date = datedictionary[relevantdata]
+        print date
+    except:
+        print relevantdata, datafrominfo
+    try:
+        eventid = cwagsDBSelect("Select id from event where date like :date", {"date": date})
+        return eventid.next()
+    except:
+        print "This date didn't input correctly"
 
 def lookupdog(dogentrystring,num):
     num = str(num)
@@ -141,4 +154,3 @@ for entry in entries:
         uniqueid2 = lookupdog(entry,2)
         create_run_info(entry['SignupforOctoberRoundsforthisdog2'],uniqueid2['id'])
     
-  
