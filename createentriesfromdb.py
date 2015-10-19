@@ -76,7 +76,7 @@ def create_run_info(signup,uniqueid):
             #print roundidx
             try:
                 tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
-                print tryclause               
+                print tryclause.next()               
                 print "Try succeeded"
             except:
                 print "Create this entry!", uniqueid, data                
