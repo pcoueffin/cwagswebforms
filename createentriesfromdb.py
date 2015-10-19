@@ -75,12 +75,13 @@ def create_run_info(signup,uniqueid):
             roundidx = roundidxx.next()
             #print roundidx
             try:
-                cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
+                tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
+                print tryclause               
                 print "Try succeeded"
             except:
                 print "Create this entry!", uniqueid, data                
-                cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, '');", {"round": roundidx["id"], "dog": uniqueid})
-                cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
+                tryclause = cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, '');", {"round": roundidx["id"], "dog": uniqueid})
+                tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
                 
         else:
             #print data
