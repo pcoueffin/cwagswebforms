@@ -28,6 +28,7 @@ insert into event (date, location)
 
 
 CREATE VIEW maximum_runs AS SELECT event.id AS event, event.hours, count(round.id) AS number_of_rounds, 2.5 AS average_run_time, event.run_cost FROM round, event WHERE event.id = round.event GROUP BY event.id;
-CREATE VIEW running_order AS SELECT run.dog AS dog, dog.id AS dogid, dog.name AS dogname, run.round AS round from run, dog;
+
 CREATE VIEW income AS SELECT event, number_of_rounds*10 AS course_build_time, ((hours * 60) - (number_of_rounds * 10)) as number_of_runs, (((hours * 60) - (number_of_rounds * 10)) / average_run_time) * run_cost as income from maximum_runs;
 
+CREATE VIEW running_order AS SELECT run.dog, dog.id, dog.name, run.round, round.event, round.level FROM run LEFT JOIN dog ON run.dog = dog.id LEFT JOIN round ON run.round = round.id ORDER BY round.id;

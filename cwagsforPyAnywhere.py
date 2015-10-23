@@ -1,5 +1,6 @@
 import sqlite3
 from bottle import route, run, debug, template, request, static_file
+import bottle
 
 def cwagsDBSelect(query, params=None, scope="all"):
     c=cwagsDB().cursor()
@@ -16,9 +17,9 @@ def cwagsDBSelect(query, params=None, scope="all"):
 
 def cwagsDBUpdate(table, id, params):
     idx=0
-    # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables! 
+    # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables!
     query="UPDATE %s SET " % table
-    for key in params:        
+    for key in params:
         if idx > 0:
             query += ", "
         query += key + ' = "' + params[key] + '"'
@@ -28,7 +29,7 @@ def cwagsDBUpdate(table, id, params):
     c=cwagsDB()
     c.execute(query)
     c.commit()
-    
+
 
 def cwagsDB():
     return sqlite3.connect('cwags.sqlite')
@@ -56,7 +57,7 @@ class CWAGSDbResult:
             self.idx+=1
             ret={name: val}
         return ret
-    
+
     #Python 3 compat:
     def __next__(self):
         return self.next(self)
@@ -94,34 +95,15 @@ def personUpdate(id):
         cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email)", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})
         res = cwagsDBSelect("SELECT last_insert_rowid()", scope="one")
     return template('edit_person', results=cwagsDBSelect("SELECT name, address, phone, email FROM person WHERE id = :id", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
-    
+
 @route('/register')
 def form():
     return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
 
-"""
-#this mostly works as is
 @route('/viewrunningorder/<id:int>', method='GET')
 def update(id):
-    #a quick hack to get all the rounds from each day's event with one url
-    id1 = id
-    id2 = id+6
-    ids = range(id1,id2)
-    rows = []
-    for iden in ids:
-        rows.append(cwagsDBSelect("Select dog, dogname from running_order WHERE round=:id and dog = dogid;", {'id':iden}))
-    print rows
-    return template('make_table_multi', list_of_rows=rows)
-"""
-
-
-@route('/viewrunningorder/<id:int>', method='GET')
-def update(id):
-    eventid = id
-    #rows = []
-    rows = cwagsDBSelect("Select round, level, name from running_order where event = :id;", {'id':eventid})
-    #print rows
-    return template('make_running_orders', rows=rows)
+    rows = cwagsDBSelect("Select dog, dogname from running_order WHERE round=:id and dog = dogid;", {'id':id})
+    return template('make_table', rows=rows)
 
 @route('/lookupentry/<name:path>', method='GET')
 def form(name):
@@ -139,7 +121,17 @@ def form(id):
     if "save" in request.forms.keys():
         del(request.forms["save"])
     cwagsDBUpdate("run", id, request.forms)
-    
 
-debug(True)
-run(reloader=True)
+
+
+# #  Web application main  # #
+
+def main():
+
+    # Start the Bottle webapp
+    bottle.debug(True)
+    bottle.run(app=app, quiet=False, reloader=True, host='0.0.0.0', port=80)
+app = bottle.default_app()
+if __name__ == "__main__":
+    main()
+

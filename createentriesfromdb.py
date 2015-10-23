@@ -148,7 +148,11 @@ for entry in entries:
     uniqueid1 = lookupdog(entry,1)
     print 'unique', uniqueid1
     print "creating an entry"
-    create_run_info(entry['SignupforOctoberRoundsforthisdog1'],uniqueid1['id'])
+    try:
+        create_run_info(entry['SignupforOctoberRoundsforthisdog1'],uniqueid1['id'])
+    except:
+        print "this dog has no entries?"
+        pass
     #check for second dog
     if len(entry['Dogsname2'])>1 :
         uniqueid2 = lookupdog(entry,2)
