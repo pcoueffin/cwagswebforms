@@ -4,7 +4,7 @@
 <html>
 <body>
 <h1>Register to use online sign up</h1>
-%form = template('make_form',  rows=passedIntoTpl, action=("/register"))
+%form = template('/home/cwags/cwagswebforms/make_form.tpl',  rows=passedIntoTpl, action=("/register"))
 
 {{!form}}
 </body>

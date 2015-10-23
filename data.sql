@@ -10,9 +10,9 @@ insert into forms (id, dataid, datatype, dataname, datalength) values (8, 8, 'ch
 
 
 
-insert into person (name,address,phone,email) values ("Courtenay Watson","485 Fortune Dr Kamloops BC V2B2J5","2505787101","licketysit@gmail.com");
-insert into person (name,email) values ("Dana Gallagher","3dogslater@gmail.com");
-insert into person (name,address,phone,email) values ("Shauna Moore","Box 1271 Ashcroft BC V0K1A0","2503159407","nauna@telus.net");
+insert into person (name,address,phone,email) values ("Couson","4J5","201","lickom");
+insert into person (name,email) values ("Dgher","3do.com");
+insert into person (name,address,phone,email) values ("Shaore","Box 12710","2507","nalus.net");
 insert into person (name) values ("PlaceHolder Judge");
 insert into judge select id from person;
 
@@ -36,24 +36,24 @@ insert into round (event, idx, level, judge) select event.id,17, 3, judge.id fro
 insert into round (event, idx, level, judge) select event.id,18, 3, judge.id from event, judge, person where date = "February 22, 2015" and location = "Kamloops"  and judge.id=person.id and person.name = "Dana Gallagher";
 
 
-insert into person (name, address, phone, email) values ("Lynne Johaneson", "11319 Priest Valley Drive Coldstream, BC V1B 1B4",	"2505453147", "kljohanes@shaw.ca");
+insert into person (name, address, phone, email) values ("Lyon", "11319 Pri 1B4",	"2147", "kljoh.ca");
 
-insert into person (name,address, phone, email) values ("Alice Jantzen","3460 Hope Drive Armstrong B.C. V0E 1B8","2505036100","aljantzen@hotmail.com");
-insert into person (name,address, phone, email) values ("Cathy Barber","#35 3665 Westsyde Road Kamloops BC V2B7H5","2505799711","gizmogeorgie@yahoo.ca");
-insert into person (name,phone, email) values ("Deb Watson","7782207121","petrescuerz@gmail.com");
-insert into person (name,address, phone, email) values ("Derek Dixon","1880 Red Tail Crescent Kamloops BC V2B8S9","2505541880","dixonld@shaw.ca");
-insert into person (name,address, phone, email) values ("Ellen Nicholson","1558 Southview Terrace","7784704877","enichol1@shaw.ca");
-insert into person (name,address, phone, email) values ("Lissa Porath","662 Sycamore Drive Kamloops BC  V2B 6R5","250-579-5228","aarcat@shaw.ca");
-insert into person (name,address, phone, email) values ("Lynne Johaneson","11319 Priest Valley Drive Coldstream BC V1B1B4  ","250-351-5263","kljohanes@shaw.ca");
-insert into person (name,address, phone, email) values ("Martha Goheen","2068 Monteith Drive Kamloops BC V2E 2G5","778-220-3262","cruisero@telus.net");
-insert into person (name,address, phone, email) values ("Natalie Vivian","1787 Gardiner Rd Kamloops BC V2C6V8","250-573-3123","natalie-vivian@shaw.ca");
-insert into person (name,address, phone, email) values ("Tanya Vivian","1357 Crestwood Drive Kamloops BC V2C 5H1","250-319-8428","tvivian@shaw.ca");
-insert into person (name,address, phone, email) values ("Trishanna Ramsey","3695 coldicott dr armstrong bc v0e1b4","250-938-2210","Okanagangeckos@hotmail.com");
-insert into person (name,address, phone, email) values ("Jan Wherley","1206 Chimney Valley Rd Williams Lake BC V2G-4W6","250 392-3479","janpeter@xplornet.ca");
-insert into person (name,address, phone, email) values ("Pat Truitt","8227 Buchanan Rd. Coldstream B.C. V1B3B8","2502603078","cantree@telus.net");
+insert into person (name,address, phone, email) values ("Alitzen","31B8","2505036100","aljmail.com");
+insert into person (name,address, phone, email) values ("Carber","#3B7H5","2505799711","gizmoo.ca");
+insert into person (name,phone, email) values ("Deatson","77121","peil.com");
+insert into person (name,address, phone, email) values ("Derxon","188S9","250","dix.ca");
+insert into person (name,address, phone, email) values ("Ellcholson","15 SouTece","77877","enw.ca");
+insert into person (name,address, phone, email) values ("Liorath","662 6R5","25028","aa");
+insert into person (name,address, phone, email) values ("Lynaneson","1131am BC V1B1B4  ","25263","klw.ca");
+insert into person (name,address, phone, email) values ("Marheen","2068 5","778-262","elus.net");
+insert into person (name,address, phone, email) values ("Natian","1787 C6V8","2523","nat.ca");
+insert into person (name,address, phone, email) values ("vian","135H1","258","tviaw.ca");
+insert into person (name,address, phone, email) values ("Trianny","361b4","2-2210","Okana.com");
+insert into person (name,address, phone, email) values ("Jerley","120G-4W6","2579","janrnet.ca");
+insert into person (name,address, phone, email) values ("Ptt","82B3B8","25078","cantr.net");
 
 insert into round (event, idx, level, judge, ring, course) select event.id,1,1,judge.id,1,"a"  from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
-insert into round (event, idx, level, judge, ring, course) select event.id,2,2,judge.id,2,"b"  from event, judge, person where date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
+insert into round (event, idx, level, judge, ring, course) select event.id,2,2,judge.id,2,"b"  from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
 insert into round (event, idx, level, judge, ring, course) select event.id,3,1,judge.id,1,"a" from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
 insert into round (event, idx, level, judge, ring, course) select event.id,4,2,judge.id,2,"b" from event, judge, person where event.date = "October 16, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
 insert into round (event, idx, level, judge, ring, course) select event.id,1,1,judge.id,1,"a" from event, judge, person where event.date = "October 23, 2015" and judge.id = person.id and person.name = "Courtenay Watson";
