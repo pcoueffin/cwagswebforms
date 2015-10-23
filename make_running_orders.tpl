@@ -1,4 +1,4 @@
-%#template to generate a HTML table from a list of tuples 
+%#template to generate a HTML table from a list of tuples
 %#(or list of lists, or tuple of tuples or ...)
 <table border="1">
 %rounds = []
@@ -11,7 +11,7 @@
 
   %if round not in rounds:
 
-  %tabletitle = "Round "+str(round-22)+" Level "+str(level)
+  %tabletitle = "Round "+str(round-21)+" Level "+str(level)
   %createnewtablecode = "</table><h1>"+tabletitle+"</h1><table border=\"1\">"
 
   {{!createnewtablecode}}

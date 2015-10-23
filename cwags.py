@@ -31,7 +31,7 @@ def cwagsDBUpdate(table, id, params):
     
 
 def cwagsDB():
-    return sqlite3.connect('cwags.sqlite')
+    return sqlite3.connect('/home/cwags/cwagswebforms/cwags.sqlite')
 
 
 

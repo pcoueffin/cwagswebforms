@@ -17,9 +17,9 @@ def cwagsDBSelect(query, params=None, scope="all"):
 
 def cwagsDBUpdate(table, id, params):
     idx=0
-    # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables! 
+    # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables!
     query="UPDATE %s SET " % table
-    for key in params:        
+    for key in params:
         if idx > 0:
             query += ", "
         query += key + ' = "' + params[key] + '"'
@@ -29,7 +29,7 @@ def cwagsDBUpdate(table, id, params):
     c=cwagsDB()
     c.execute(query)
     c.commit()
-    
+
 
 def cwagsDB():
     return sqlite3.connect('cwags.sqlite')
@@ -57,7 +57,7 @@ class CWAGSDbResult:
             self.idx+=1
             ret={name: val}
         return ret
-    
+
     #Python 3 compat:
     def __next__(self):
         return self.next(self)
@@ -95,7 +95,7 @@ def personUpdate(id):
         cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email)", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})
         res = cwagsDBSelect("SELECT last_insert_rowid()", scope="one")
     return template('edit_person', results=cwagsDBSelect("SELECT name, address, phone, email FROM person WHERE id = :id", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
-    
+
 @route('/register')
 def form():
     return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
@@ -120,7 +120,7 @@ def update(id):
 def update(id):
     eventid = id
     #rows = []
-    rows = cwagsDBSelect("Select round, level, name from running_order where event = :id;", {'id':eventid})
+    rows = cwagsDBSelect("Select round, level, name from running_order where event = :id order by round, random();", {'id':eventid})
     #print rows
     return template('make_running_orders', rows=rows)
 
@@ -140,7 +140,7 @@ def form(id):
     if "save" in request.forms.keys():
         del(request.forms["save"])
     cwagsDBUpdate("run", id, request.forms)
-    
+
 
 # #  Web application main  # #
 
