@@ -1,5 +1,6 @@
 import sqlite3
 from bottle import route, run, debug, template, request, static_file
+import bottle
 
 def cwagsDBSelect(query, params=None, scope="all"):
     c=cwagsDB().cursor()
