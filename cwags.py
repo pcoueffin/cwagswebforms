@@ -99,10 +99,29 @@ def personUpdate(id):
 def form():
     return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
 
+"""
+#this mostly works as is
 @route('/viewrunningorder/<id:int>', method='GET')
 def update(id):
-    rows = cwagsDBSelect("Select dog, dogname from running_order WHERE round=:id and dog = dogid;", {'id':id})
-    return template('make_table', rows=rows)
+    #a quick hack to get all the rounds from each day's event with one url
+    id1 = id
+    id2 = id+6
+    ids = range(id1,id2)
+    rows = []
+    for iden in ids:
+        rows.append(cwagsDBSelect("Select dog, dogname from running_order WHERE round=:id and dog = dogid;", {'id':iden}))
+    print rows
+    return template('make_table_multi', list_of_rows=rows)
+"""
+
+
+@route('/viewrunningorder/<id:int>', method='GET')
+def update(id):
+    eventid = id
+    #rows = []
+    rows = cwagsDBSelect("Select round, level, name from running_order where event = :id;", {'id':eventid})
+    #print rows
+    return template('make_running_orders', rows=rows)
 
 @route('/lookupentry/<name:path>', method='GET')
 def form(name):
