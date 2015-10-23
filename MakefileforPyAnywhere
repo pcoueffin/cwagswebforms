@@ -10,4 +10,3 @@ cwags.sqlite: schema.sql data.sql addtodb1.py entries1.csv createentriesfromdb.p
 commit:
 	git commit
 	git push
-
