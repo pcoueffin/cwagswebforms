@@ -1,0 +1,10 @@
+Use python script to make 1 docx file per run
+soffice --headless --print-to-file *.docx 
+turns them into ps files
+ls | grep .ps > filelist.txt
+makes a list of them for easier copy/pasting. Replace the hard returns with a space (NOT A COMMA)
+gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=combopdf.ps -dBATCH ScribeOct231.ps, ScribeOct232.ps, ScribeOct233.ps, ScribeOct234.ps, ScribeOct235.ps, ScribeOct236.ps, ScribeOct237.ps, ScribeOct238.ps, ScribeOct239.ps, ScribeOct2310.ps, ScribeOct2311.ps, ScribeOct2312.ps, ScribeOct2313.ps, ScribeOct2314.ps, ScribeOct2315.ps, ScribeOct2316.ps
+
+That makes the combo file.
+
+Use GUI to print two to a page (ugh)
