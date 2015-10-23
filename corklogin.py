@@ -3,12 +3,14 @@ from beaker.middleware import SessionMiddleware
 from cork import Cork
 import logging
 
+
 logging.basicConfig(format='localhost - - [%(asctime)s] %(message)s', level=logging.DEBUG)
 log = logging.getLogger(__name__)
 bottle.debug(True)
 
 # Use users.json and roles.json in the local example_conf directory
-aaa = Cork('example_conf', email_sender='federico.ceratto@gmail.com', smtp_url='smtp://smtp.magnet.ie')
+#starttls://username:password@smtp.gmail.com:587
+aaa = Cork('/home/cwags/cwagswebforms/example_conf', email_sender='hdsheena@gmail.com', smtp_url='startttls://hdsheena@gmail.com:mysprintmydogsmylife@smtp.gmail.com:587')
 
 # alias the authorization decorator with defaults
 authorize = aaa.make_auth_decorator(fail_redirect="/login", role="user")
@@ -33,14 +35,16 @@ def postd():
 
 
 def post_get(name, default=''):
-    return bottle.request.POST.get(name, default).strip()
-
+    result = bottle.request.POST.get(name, default).strip()
+    print result
+    return result
 
 @bottle.post('/login')
 def login():
     """Authenticate users"""
     username = post_get('username')
     password = post_get('password')
+    print username, password
     aaa.login(username, password, success_redirect='/', fail_redirect='/login')
 
 @bottle.route('/user_is_anonymous')
@@ -55,11 +59,13 @@ def logout():
     aaa.logout(success_redirect='/login')
 
 
-@bottle.post('/signup')
+@bottle.post('/register')
+@bottle.view('/home/cwags/cwagswebforms/views/registration_email.tpl')
 def register():
     """Send out registration email"""
-    aaa.register(post_get('username'), post_get('password'), post_get('email_address'))
-    return 'Please check your mailbox.'
+    returned_output = aaa.register(post_get('username'), post_get('password'), post_get('email_address'))
+    return str(returned_output)
+    #return {}
 
 
 @bottle.route('/validate_registration/:registration_code')
@@ -224,6 +230,6 @@ def main():
     # Start the Bottle webapp
     bottle.debug(True)
     #bottle.run(app=app, quiet=False, reloader=True)
-application = bottle.default_app()
+application = app
 if __name__ == "__main__":
     main()
