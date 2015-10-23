@@ -130,12 +130,8 @@ def main():
 
     # Start the Bottle webapp
     bottle.debug(True)
-    bottle.run(app=app, quiet=False, reloader=True, host='0.0.0.0', port=80)
-app = bottle.default_app()
+    bottle.run()
+application = bottle.default_app()
 if __name__ == "__main__":
     main()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c715838667694a94e61d2cc41d56a9c017da252
