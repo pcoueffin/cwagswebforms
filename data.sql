@@ -1,3 +1,20 @@
+--cork login data
+   INSERT INTO users (username, email_addr, desc, role, hash, creation_date) VALUES
+        (
+            'admin',
+            'admin@localhost.local',
+            'admin test user',
+            'admin',
+            'cLzRnzbEwehP6ZzTREh3A4MXJyNo+TV8Hs4//EEbPbiDoo+dmNg22f2RJC282aSwgyWv/O6s3h42qrA6iHx8yfw=',
+            '2012-10-28 20:50:26.286723'
+        );
+        INSERT INTO roles (role, level) VALUES ('special', 200);
+        INSERT INTO roles (role, level) VALUES ('admin', 100);
+        INSERT INTO roles (role, level) VALUES ('editor', 60);
+        INSERT INTO roles (role, level) VALUES ('user', 50);
+
+
+--sample data and form for sign up
 insert into forms (id, dataid, datatype, dataname, datalength) values (0, 0, 'text', 'name',15);
 insert into forms (id, dataid, datatype, dataname, datalength) values (1, 1, 'text', 'address', 30);
 insert into forms (id, dataid, datatype, dataname, datalength) values (2, 2, 'text', 'phone number', 10);

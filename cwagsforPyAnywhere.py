@@ -14,7 +14,12 @@ log = logging.getLogger(__name__)
 bottle.debug(True)
 
 # Use users.json and roles.json in the local example_conf directory
-aaa = Cork('/home/cwags/cwagswebforms/example_conf', email_sender='hdsheena@gmail.com', smtp_url='startttls://hdsheena@gmail.com:mysprintmydogsmylife@smtp.gmail.com:587')
+#aaa = Cork('/home/cwags/cwagswebforms/example_conf', email_sender='hdsheena@gmail.com', smtp_url='startttls://hdsheena@gmail.com:mysprintmydogsmylife@smtp.gmail.com:587')
+
+#should make it use sqlite
+from cork.backends import SQLiteBackend
+sb = SQLiteBackend('cwags.sqlite')
+aaa = Cork(backend=sb)
 
 # alias the authorization decorator with defaults
 authorize = aaa.make_auth_decorator(fail_redirect="/login", role="user")
