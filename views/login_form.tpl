@@ -19,7 +19,7 @@
   <div class="box">
       <h2>Signup</h2>
       <p>Please insert your credentials:</p>
-      <form action="register" method="post" name="signup">
+      <form action="registering" method="post" name="signup">
           <input type="text" name="username" value="username"/>
           <input type="password" name="password" />
           <input type="text" name="email_address" value="email address"/>

@@ -8,7 +8,7 @@ class CWAGSDbResult:
         self.values = values
         self.idx    = 0
         self.scope  = scope
-    
+
     def __iter__(self):
         return self
 
@@ -22,11 +22,11 @@ class CWAGSDbResult:
             self.idx+=1
             ret={name: val}
         return ret
-    
+
     #Python 3 compat:
     def __next__(self):
         return self.next(self)
-        
+
 
 def cwagsDBSelect(query, params=None, scope="all"):
    db=cwagsDB()
@@ -46,8 +46,8 @@ def cwagsDBSelect(query, params=None, scope="all"):
 def cwagsDB():
     print "connecting to database..."
     return sqlite3.connect('cwags.sqlite')
-    
-    
+
+
 
 
 entries = cwagsDBSelect("select * from entries;")
@@ -83,10 +83,10 @@ def create_run_info(signup,uniqueid):
         #print roundidx
         try:
             tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
-            print tryclause.next()               
+            print tryclause.next()
             print "Try succeeded"
         except:
-            print "Create this entry!", uniqueid, data                
+            print "Create this entry!", uniqueid, data
             tryclause = cwagsDBSelect("Insert into run(round, dog, result) values(:round, :dog, '');", {"round": roundidx["id"], "dog": uniqueid})
             tryclause = cwagsDBSelect("Select id from run where round = :round and dog = :dog;", {"round":roundid, "dog": uniqueid})
 
@@ -114,7 +114,7 @@ def lookupdog(dogentrystring,num):
     person = dogentrystring['Name']
     breed=dogentrystring['Breedofdog'+num]
     cwags = dogentrystring['DogsCWAGSnumber'+num]
-    disabilities = dogentrystring['DogReactivity'+num]
+    reactivity = dogentrystring['DogReactivity'+num]
     owner = lookupowner(person, dogentrystring)
     #print type(owner)
     #print owner.names
@@ -123,11 +123,11 @@ def lookupdog(dogentrystring,num):
         return uniqueid.next()
     except:
         print name
-        cwagsDBSelect("insert into dog(name, breed, cwags, disabilities, owner) values(:name, :breed, :cwags, :disabilities, :owner);", {"name":name, "breed":breed, "cwags":cwags, "disabilities":disabilities, "owner":owner["id"]})
+        cwagsDBSelect("insert into dog(name, breed, cwags, reactivity, owner) values(:name, :breed, :cwags, :reactivity, :owner);", {"name":name, "breed":breed, "cwags":cwags, "reactivity":reactivity, "owner":owner["id"]})
         print "Create this record"
         uniqueid=cwagsDBSelect("Select id from dog where name like :name;", {"name": name})
         return uniqueid.next()
-        
+
 def lookupowner(fromlookupdog, dog):
     name = fromlookupdog
     email = dog["Emailaddress"]
@@ -157,4 +157,4 @@ for entry in entries:
     if len(entry['Dogsname2'])>1 :
         uniqueid2 = lookupdog(entry,2)
         create_run_info(entry['SignupforOctoberRoundsforthisdog2'],uniqueid2['id'])
-    
+

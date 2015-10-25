@@ -7,7 +7,7 @@ import bottle
 from beaker.middleware import SessionMiddleware
 from cork import Cork
 import logging
-
+bottle.TEMPLATES.clear()
 
 logging.basicConfig(format='localhost - - [%(asctime)s] %(message)s', level=logging.DEBUG)
 log = logging.getLogger(__name__)
@@ -62,7 +62,7 @@ def logout():
     aaa.logout(success_redirect='/login')
 
 
-@bottle.post('/register')
+@bottle.post('/registering')
 @bottle.view('/home/cwags/cwagswebforms/views/registration_email.tpl')
 def register():
     """Send out registration email"""
@@ -157,7 +157,8 @@ def sorry_page():
 
 
 def cwagsDBSelect(query, params=None, scope="all"):
-    c=cwagsDB().cursor()
+    db=cwagsDB()
+    c=db.cursor()
     if params:
         c.execute(query, params)
     else:
@@ -167,18 +168,23 @@ def cwagsDBSelect(query, params=None, scope="all"):
         "one": lambda: iter(c.fetchone())
     }).get(scope)()
     names=c.description
+    db.commit()
     return CWAGSDbResult(names, res, scope)
 
-def cwagsDBUpdate(table, id, params):
+def cwagsDBUpdate(query, table, id, params):
+    #enter a fourth piece of info, the number 1, for the "usual" update method. I need it to do a plain query commit, so this is how I did it.
     idx=0
     # THIS IS SO VERY IMMORAL.  I'm sorry little Bobby Tables!
-    query="UPDATE %s SET " % table
-    for key in params:
-        if idx > 0:
-            query += ", "
-        query += key + ' = "' + params[key] + '"'
-        idx += 1
-    query += " WHERE id = " + str(id)
+    if query == 1:
+        query="UPDATE %s SET " % table
+        for key in params:
+            if idx > 0:
+                query += ", "
+            query += key + ' = "' + params[key] + '"'
+            idx += 1
+        query += " WHERE id = " + str(id)
+    else:
+        query = query
     print query
     c=cwagsDB()
     c.execute(query)
@@ -246,15 +252,34 @@ def personUpdate(id):
         cwagsDBUpdate("person", id, request.forms)
     else:
         print "INSERT... person"
-        cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email)", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})
+        cwagsDBSelect("INSERT INTO person(name, address, phone, email) VALUES (:name, :address, :phone, :email);", {"name": request.forms.get("name"), "address": request.forms.get("address"), "phone": request.forms.get("phone"), "email": request.forms.get("email")})
         res = cwagsDBSelect("SELECT last_insert_rowid()", scope="one")
-    return template('edit_person', results=cwagsDBSelect("SELECT name, address, phone, email FROM person WHERE id = :id", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
+    return template('edit_person', results=cwagsDBSelect("SELECT name, address, phone, email FROM person WHERE id = :id;", {"id": id}, scope="one"), action=("/person/" + str(id)), id=id)
 
-#@route('/register')
-#def form():
-#    return template('registration_page', rows=cwagsDBSelect("SELECT datatype, dataid, dataname, datalength FROM forms"))
+@route('/register')
+@bottle.view('/home/cwags/cwagswebforms/views/registration_form')
+def registration_form():
+    return {}
+
+@route('/register', method="POST")
+def post_reg():
+    cwagsDBSelect("Insert into person(name, address, phone, email, disabilities) VALUES (:name, :address, :phone, :email, :disabilities)", {'name': post_get("person_name"), "address":post_get("address"), "phone":post_get("phone"), "email":post_get("email"), "disabilities":post_get("disabilities")})
+    owner_id = cwagsDBSelect("select id from person where name = :name", {'name': post_get("person_name")}).next()
+    cwagsDBSelect("Insert into dog(name, breed, cwags, reactivity, owner) VALUES (:name, :breed, :cwags, :reactivity, :owner)", {'name': post_get('dog_name'), 'breed': post_get('breed'), 'cwags': post_get('cwags'), 'reactivity': post_get('reactivity'), 'owner': owner_id['id']})
+    return template('/home/cwags/cwagswebforms/views/registration_submitted', verify=cwagsDBSelect("Select * from person, dog where person.id = dog.owner AND person.name = :name", {'name': post_get('person_name')}))
+"""
+@bottle.post('/registered')
+def registration_submitted():
+    #spit info back at user
+    #data =
+    user = cork.User()
+    return user.registration(postd().person_name, postd().address, postd().email)
+    #return returned_output
+    #return {}
+    #toggle return statements here to turn emailing back on someday, and take the @view out
 
 
+"""
 #this mostly works as is
 #@route('/viewrunningorder/<id:int>', method='GET')
 #def update(id):
