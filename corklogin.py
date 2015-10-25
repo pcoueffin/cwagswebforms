@@ -66,6 +66,7 @@ def register():
     returned_output = aaa.register(post_get('username'), post_get('password'), post_get('email_address'))
     return str(returned_output)
     #return {}
+    #toggle return statements here to turn emailing back on someday, and take the @view out
 
 
 @bottle.route('/validate_registration/:registration_code')
