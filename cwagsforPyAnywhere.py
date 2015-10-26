@@ -266,7 +266,35 @@ def post_reg():
     cwagsDBSelect("Insert into person(name, address, phone, email, disabilities) VALUES (:name, :address, :phone, :email, :disabilities)", {'name': post_get("person_name"), "address":post_get("address"), "phone":post_get("phone"), "email":post_get("email"), "disabilities":post_get("disabilities")})
     owner_id = cwagsDBSelect("select id from person where name = :name", {'name': post_get("person_name")}).next()
     cwagsDBSelect("Insert into dog(name, breed, cwags, reactivity, owner) VALUES (:name, :breed, :cwags, :reactivity, :owner)", {'name': post_get('dog_name'), 'breed': post_get('breed'), 'cwags': post_get('cwags'), 'reactivity': post_get('reactivity'), 'owner': owner_id['id']})
-    return template('/home/cwags/cwagswebforms/views/registration_submitted', verify=cwagsDBSelect("Select * from person, dog where person.id = dog.owner AND person.name = :name", {'name': post_get('person_name')}))
+    return template('/home/cwags/cwagswebforms/views/registration_submitted', verify=cwagsDBSelect("Select person.name as Name, person.address, person.phone, person.email, person.disabilities, dog.name as Dog, dog.breed, dog.cwags, dog.reactivity, person.id, dog.owner, dog.id as DogId from person, dog where person.id = dog.owner AND person.name = :name", {'name': post_get('person_name')}))
+
+
+@route('/dog/<id:int>', method='GET')
+def dog(id):
+    return template('views/edit_runs', results=cwagsDBSelect("select round.id as id, round.event as event_id, round.level as level, round.idx as idx, event.date as date FROM round, event where event.id = round.event and date(date)>date('now')"), action=("/dog/" + str(id)), id=id)
+
+
+@route('/dog/<id:int>', method='POST')
+def dogUpdate(id):
+    if (id >= 0):
+        print "UPDATE... entries for dog " + str(id)
+        if "save" in request.forms.keys():
+            del(request.forms["save"])
+        for entered_round in request.forms.keys():
+            cwagsDBSelect("Insert into run (dog, round) VALUES(:dogid, :roundid)", {"dogid":id, "roundid":request.forms.get(entered_round)})
+        return template('make_table', rows = cwagsDBSelect("Select * from run where dog = :dogid", {"dogid":id}))
+    else:
+        print "Sorry, this dog does not exist"
+        return template('views/find_dog', results=cwagsDBSelect("SELECT name, id FROM dog;"))
+
+
+
+
+
+
+
+
+
 """
 @bottle.post('/registered')
 def registration_submitted():

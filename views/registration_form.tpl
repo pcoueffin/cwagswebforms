@@ -50,13 +50,13 @@
     <tr>
       <td>Handler - Disability?</td>
       <td>
-	<input type="checkbox"  size="0" id="7" name="disabilities"/>
+	<input type="checkbox"  size="0" id="7" name="disabilities" value="YES"/>
       </td>
     </tr>
     <tr>
       <td>Dog - Reactivity?</td>
       <td>
-	<input type="checkbox"  size="0" id="8" name="reactivity"/>
+	<input type="checkbox"  size="0" id="8" name="reactivity" value="YES"/>
       </td>
     </tr>
   </table>

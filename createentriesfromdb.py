@@ -75,9 +75,10 @@ def create_run_info(signup,uniqueid):
         #rnd = dateround[1]
         #level = roundlevel[1]
         roundid = int(rnd)
-        #print roundid
+        print roundid
         eventid = lookupeventid(data)
         eventnum = eventid["id"]
+        print eventnum
         roundidxx = cwagsDBSelect("Select id from round where event = :eventnum and idx = :roundid;", {"roundid":roundid, "eventnum":eventnum})
         roundidx = roundidxx.next()
         #print roundidx
@@ -102,7 +103,7 @@ def lookupeventid(datafrominfo):
     except:
         print relevantdata, datafrominfo
     try:
-        eventid = cwagsDBSelect("Select id from event where date like :date", {"date": date})
+        eventid = cwagsDBSelect("Select id from event where datestring like :date", {"date": date})
         return eventid.next()
     except:
         print "This date didn't input correctly"
