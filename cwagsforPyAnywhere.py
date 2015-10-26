@@ -271,7 +271,7 @@ def post_reg():
 
 @route('/dog/<id:int>', method='GET')
 def dog(id):
-    return template('views/edit_runs', results=cwagsDBSelect("select round.id as id, round.event as event_id, round.level as level, round.idx as idx, event.date as date FROM round, event where event.id = round.event and date(date)>date('now')"), action=("/dog/" + str(id)), id=id)
+    return template('views/edit_runs', results=[cwagsDBSelect("select dog.name, run.result, round.level from run, dog, round where run.round=round.id and dog.id = run.dog and dog.id = :id order by round.id;", {"id":id}),cwagsDBSelect("select round.id as id, round.event as event_id, round.level as level, round.idx as idx, event.date as date FROM round, event where event.id = round.event and date(date)>date('now')")], action=("/dog/" + str(id)), id=id)
 
 
 @route('/dog/<id:int>', method='POST')

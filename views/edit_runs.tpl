@@ -1,13 +1,22 @@
+<h1>Results so far:</h1>
+<table border='0'>
+%for row in results[0]:
+    <tr>
+      <td> {{row['name']}}</td>
+      <td> {{row['level']}}</td>
+      <td>{{row['result']}}</td>
+    </tr>
+%end
+
 <form action="{{action}}" method="POST">
 <table border="0">
-%value = ""
-%element = ""
+
   <tr>
      <td>Event date: </td>
       <td>Level: </td>
       <td>Round number: </td>
       </tr>
-  %for row in results:
+  %for row in results[1]:
 
 
     <tr>
