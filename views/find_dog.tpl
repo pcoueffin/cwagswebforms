@@ -13,9 +13,9 @@
   </tr>
   %end
   <tr>
-    %for col in hdr:
-    <td><a href="http://cwags.pythonanywhere.com/dog/{{row[col]}}">{{row[col]}}</a></td>
-    %end
+
+    <td><a href="http://cwags.pythonanywhere.com/dog/{{row['id']}}">{{row['name']}}</a></td>
+
   </tr>
 %end
 </table>
